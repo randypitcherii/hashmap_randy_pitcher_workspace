@@ -1,0 +1,53 @@
+# Production pipeline
+pool:
+  vmImage: 'ubuntu-latest'
+
+# configure triggers
+# this pipeline runs when a change is made to master and on a regular schedule
+trigger: 
+  - master
+schedules:
+- cron: "0 */1 * * *" # run hourly
+  displayName: Scheduled DBT Run
+  branches:
+    include:
+    - master
+  always: true # run even if the code hasn't changed
+
+
+# establish environemnt variables for all stages, jobs, and steps
+variables:
+  DBT_PROFILE_TARGET: prod
+  DBT_PROFILE_ROLE:   CICD_DEMO_DBT_PROD_SERVICE_ACCOUNT_ROLE
+  DBT_PROFILE_DB:     CICD_DEMO_PROD
+  DBT_PROFILE_WH:     CICD_DEMO_DBT_PROD_WH
+  DBT_PROFILE_SCHEMA: PROD
+  TZ:                 America/Chicago
+
+
+stages:
+  - stage: build_and_deploy_models
+    displayName: Build and deploy models
+    jobs:
+      - job: deploy_models
+        displayName: Deploy models with DBT
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '3.7'
+            displayName: 'Install python $(python.version)'
+
+          - script: |
+              python -m pip install --upgrade pip
+              pip install dbt
+            displayName: 'Update PIP and install DBT'
+
+          - script: |
+              cd dbt
+              dbt run --profiles-dir ../azure_pipelines/dbt_pipeline_profiles
+            displayName: 'Deploy models with DBT'
+            env:
+              DBT_PROFILE_SNOWFLAKE_ACCOUNT: $(CICD_DEMO_SNOWFLAKE_ACCOUNT) # Set these values as secrets in the Azure pipelines web UI
+              DBT_PROFILE_USER:              $(CICD_DEMO_DBT_PROD_USERNAME) # Set these values as secrets in the Azure pipelines web UI
+              DBT_PROFILE_PASSWORD:          $(CICD_DEMO_DBT_PROD_PASSWORD) # Set these values as secrets in the Azure pipelines web UI
+            

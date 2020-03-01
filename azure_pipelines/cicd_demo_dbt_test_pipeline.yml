@@ -1,0 +1,48 @@
+# Test pipeline
+
+# configure the pipeline
+trigger: none
+pr:
+  - master
+pool:
+  vmImage: 'ubuntu-latest'
+
+
+# establish environemnt variables for all stages, jobs, and steps
+variables:
+  DBT_PROFILE_TARGET: test
+  DBT_PROFILE_ROLE:   CICD_DEMO_DBT_TEST_SERVICE_ACCOUNT_ROLE
+  DBT_PROFILE_DB:     CICD_DEMO_TEST
+  DBT_PROFILE_WH:     CICD_DEMO_DBT_TEST_WH
+  TZ:                 America/Chicago
+
+
+stages:
+  - stage: build_and_test
+    displayName: Build and test
+    jobs:
+      - job: run_dbt_tests
+        displayName: Run DBT Tests
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '3.7'
+            displayName: 'Install python $(python.version)'
+
+          - script: |
+              python -m pip install --upgrade pip
+              pip install dbt
+            displayName: 'Update PIP and install DBT'
+
+          - script: |
+              export DBT_PROFILE_SCHEMA=PR_$(date +"%Y%m%d_%H%M%S_%Z")
+              cd dbt
+              dbt run --profiles-dir ../azure_pipelines/dbt_pipeline_profiles
+              dbt test --profiles-dir ../azure_pipelines/dbt_pipeline_profiles
+            displayName: 'Deploy and test with DBT'
+            env:
+              DBT_PROFILE_SNOWFLAKE_ACCOUNT: $(CICD_DEMO_SNOWFLAKE_ACCOUNT) # Set these values as secrets in the Azure pipelines web UI
+              DBT_PROFILE_USER:              $(CICD_DEMO_DBT_TEST_USERNAME) # Set these values as secrets in the Azure pipelines web UI
+              DBT_PROFILE_PASSWORD:          $(CICD_DEMO_DBT_TEST_PASSWORD) # Set these values as secrets in the Azure pipelines web UI
+
+            

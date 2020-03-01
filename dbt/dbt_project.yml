@@ -1,0 +1,29 @@
+name: "cicd_demo"
+version: "0.0.1"
+
+# This setting configures which "profile" dbt uses for this project.
+profile: "cicd_demo"
+
+source-paths: ["models"]
+analysis-paths: ["analysis"]
+test-paths: ["tests"]
+data-paths: ["data"]
+macro-paths: ["macros"]
+
+target-path: "target" # directory which will store compiled SQL files
+clean-targets: # directories to be removed by `dbt clean`
+  - "target"
+  - "dbt_modules"
+
+models:
+  cicd_demo:
+    materialized: view # default to views
+    post-hook: 
+      - 'GRANT SELECT ON {{ this }} TO ROLE {{ target.database }}_READ'
+    staging:
+      schema: STAGING
+    curated:
+      schema: CURATED
+    analytics:
+      schema: ANALYTICS
+      materialized: table

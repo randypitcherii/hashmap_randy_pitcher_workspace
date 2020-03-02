@@ -13,8 +13,8 @@ cicd_demo:
       role: cicd_demo_developer
       database: cicd_demo_dev
       warehouse: cicd_demo_developer_wh
-      schema: <your first name>_<your last name>
+      schema: <your first name>_<your last name> # keeps dev spaces separated for different developers
       
-      authenticator: externalbrowser
+      authenticator: externalbrowser # SSO through browser
       threads: 1
       client_session_keep_alive: False

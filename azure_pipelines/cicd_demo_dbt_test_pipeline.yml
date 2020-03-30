@@ -4,8 +4,9 @@
 trigger: none
 pr:
   - master
-pool:
-  vmImage: 'ubuntu-latest'
+
+# configure the build agent
+pool: 'dbt_enterprise_demo-Default CI Deployment Group'
 
 
 # establish environemnt variables for all stages, jobs, and steps
@@ -24,18 +25,9 @@ stages:
       - job: run_dbt_tests
         displayName: Run DBT Tests
         steps:
-          - task: UsePythonVersion@0
-            inputs:
-              versionSpec: '3.7'
-            displayName: 'Install python $(python.version)'
-
-          - script: |
-              python -m pip install --upgrade pip
-              pip install dbt
-            displayName: 'Update PIP and install DBT'
-
           - script: |
               export DBT_PROFILE_SCHEMA=PR_$(date +"%Y%m%d_%H%M%S_%Z")
+              source dbt_run_venv/bin/activate
               cd dbt
               dbt run --profiles-dir ../azure_pipelines/dbt_pipeline_profiles
               dbt test --profiles-dir ../azure_pipelines/dbt_pipeline_profiles

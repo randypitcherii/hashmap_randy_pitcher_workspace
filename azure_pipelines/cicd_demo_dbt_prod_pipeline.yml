@@ -1,6 +1,5 @@
 # Production pipeline
-pool:
-  vmImage: 'ubuntu-latest'
+pool: 'randy_ec2_cd_agent_pool'
 
 # configure triggers
 # this pipeline runs when a change is made to master and on a regular schedule
@@ -32,17 +31,8 @@ stages:
       - job: deploy_models
         displayName: Deploy models with DBT
         steps:
-          - task: UsePythonVersion@0
-            inputs:
-              versionSpec: '3.7'
-            displayName: 'Install python $(python.version)'
-
           - script: |
-              python -m pip install --upgrade pip
-              pip install dbt
-            displayName: 'Update PIP and install DBT'
-
-          - script: |
+              source ~/dbt_run_venv/bin/activate
               cd dbt
               dbt run --profiles-dir ../azure_pipelines/dbt_pipeline_profiles
             displayName: 'Deploy models with DBT'

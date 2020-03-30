@@ -6,7 +6,7 @@ pr:
   - master
 
 # configure the build agent
-pool: 'dbt_enterprise_demo-Default CI Deployment Group'
+pool: 'randy_ec2_cd_agent_pool'
 
 
 # establish environemnt variables for all stages, jobs, and steps

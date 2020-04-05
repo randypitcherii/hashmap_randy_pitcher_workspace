@@ -34,6 +34,7 @@ stages:
           - script: |
               source ~/dbt_run_venv/bin/activate
               cd dbt
+              dbt deps
               dbt run --profiles-dir ../azure_pipelines/dbt_pipeline_profiles
             displayName: 'Deploy models with DBT'
             env:

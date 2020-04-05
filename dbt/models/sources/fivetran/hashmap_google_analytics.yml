@@ -5,7 +5,7 @@ sources:
     database: fivetran_db
     schema: hashmap_google_analytics
     loader: fivetran # informational only (free text)
-    loaded_at_field: ingestion_time # used to calculate freshness
+    loaded_at_field: _fivetran_synced # used to calculate freshness
     
     freshness:
       warn_after: {count: 24, period: hour}

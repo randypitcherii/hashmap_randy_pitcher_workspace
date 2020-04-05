@@ -27,7 +27,7 @@ stages:
         steps:
           - script: |
               source ~/dbt_run_venv/bin/activate
-              export DBT_PROFILE_SCHEMA=PR_$(date +"%Y%m%d_%H%M%S_%Z")
+              export DBT_PROFILE_SCHEMA=PR_$(date +"%Y-%m-%d_%H-%M-%S_%Z")
               cd dbt
               dbt run --profiles-dir ../azure_pipelines/dbt_pipeline_profiles
               dbt test --profiles-dir ../azure_pipelines/dbt_pipeline_profiles

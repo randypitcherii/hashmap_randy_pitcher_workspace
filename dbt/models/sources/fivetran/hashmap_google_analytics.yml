@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: google_analytics
+    database: fivetran_db
+    schema: hashmap_google_analytics
+    loader: fivetran # informational only (free text)
+    loaded_at_field: ingestion_time # used to calculate freshness
+    
+    freshness:
+      warn_after: {count: 24, period: hour}
+      
+    tables:
+      - name: DAILY_TRAFFIC_BY_INTEREST_AFFINITY_CATEGORY
+      - name: DAILY_TRAFFIC_BY_INTEREST_IN_MARKET_CATEGORY
+      - name: MINUTELY_LANDING_TRAFFIC_BY_CAMPAIGN
+      - name: MINUTELY_SITE_TRAFFIC_BY_CAMPAIGN

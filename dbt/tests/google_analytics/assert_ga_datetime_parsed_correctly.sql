@@ -7,7 +7,7 @@ UNIONED_DATES AS (
     {{ dbt_utils.union_relations(
       relations=[ref('stg_minutely_site_traffic_by_campaign'), ref('stg_minutely_landing_traffic_by_campaign')],
       include=['DATE', 'DATETIME_AMERICA_CHICAGO']
-  ) }}
+    ) }}
 )
 
 SELECT

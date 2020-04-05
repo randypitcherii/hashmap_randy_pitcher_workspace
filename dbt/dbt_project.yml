@@ -1,11 +1,11 @@
-name: "cicd_demo"
+name: "hashmap_randy_pitcher_dbt_workspace"
 version: "0.0.1"
 
 # This setting configures which "profile" dbt uses for this project.
-profile: "cicd_demo"
+profile: "hashmap_randy_pitcher_dbt_workspace"
 
 models:
-  cicd_demo:
+  hashmap_randy_pitcher_dbt_workspace:
     materialized: view # default to views
     post-hook: 
       - 'GRANT SELECT ON {{ this }} TO ROLE {{ target.database }}_READ'

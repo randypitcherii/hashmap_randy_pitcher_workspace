@@ -2,7 +2,7 @@
 # For more information on how to configure this file, please see:
 # https://docs.getdbt.com/docs/profile
 
-cicd_demo:
+hashmap_randy_pitcher_dbt_workspace:
   target: "{{ env_var('DBT_PROFILE_TARGET') }}"
 
   outputs: 

@@ -7,6 +7,9 @@ sources:
     loader: fivetran # informational only (free text)
     loaded_at_field: _fivetran_synced # used to calculate freshness
     
+    tags:
+      - google_analytics
+    
     freshness:
       warn_after: {count: 24, period: hour}
       

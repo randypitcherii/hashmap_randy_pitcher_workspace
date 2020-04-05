@@ -32,8 +32,8 @@ stages:
               export DBT_PROFILE_SCHEMA=PR_$(date +"%Y_%m_%d__%H_%M_%S__%Z")
               echo "cd dbt"
               cd dbt
-              echo "dbt deps"
-              dbt deps
+              echo "dbt deps --profiles-dir ../azure_pipelines/dbt_pipeline_profiles"
+              dbt deps --profiles-dir ../azure_pipelines/dbt_pipeline_profiles
               echo "dbt run --profiles-dir ../azure_pipelines/dbt_pipeline_profiles"
               dbt run --profiles-dir ../azure_pipelines/dbt_pipeline_profiles
               echo "dbt test --profiles-dir ../azure_pipelines/dbt_pipeline_profiles"

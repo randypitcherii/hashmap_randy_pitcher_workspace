@@ -1,4 +1,8 @@
-WITH USAGE AS (
+{{ config(tags=["google_analytics", "daily"]) }}
+
+WITH 
+
+LANDING_TRAFFIC AS (
   SELECT 
     DATE::DATE                                                         AS DATE,
     COUNTRY::STRING                                                    AS COUNTRY,
@@ -16,4 +20,4 @@ WITH USAGE AS (
     {{ source('google_analytics', 'minutely_landing_traffic_by_campaign') }}
 )
 
-SELECT * FROM USAGE
+SELECT * FROM LANDING_TRAFFIC

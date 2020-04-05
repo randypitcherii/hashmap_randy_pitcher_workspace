@@ -1,4 +1,8 @@
-WITH USAGE AS (
+{{ config(tags=["google_analytics", "daily"]) }}
+
+WITH 
+
+SITE_TRAFFIC AS (
   SELECT 
     DATE::DATE                                                         AS DATE,
     COUNTRY::STRING                                                    AS COUNTRY,
@@ -6,9 +10,9 @@ WITH USAGE AS (
     CAMPAIGN::STRING                                                   AS CAMPAIGN,
     PAGE_PATH::STRING                                                  AS PAGE_PATH,
     SOURCE_MEDIUM::STRING                                              AS SOURCE_MEDIUM,
-    NEW_USERS::NUMBER                                                  AS NEW_USERS,
+    NEW_USERS::NUMBER                                                  AS NEW_USERS_COUNT,
     GOAL_2_COMPLETIONS::NUMBER                                         AS CONTACT_US_FORM_SUBMISSIONS,
-    USERS::NUMBER                                                      AS USERS,
+    USERS::NUMBER                                                      AS TOTAL_USERS_COUNT,
     PAGEVIEWS::NUMBER                                                  AS PAGEVIEWS,
     GOAL_1_COMPLETIONS::NUMBER                                         AS CONTACT_US_PAGEVIEWS,
     TO_TIMESTAMP_NTZ(DATE_HOUR_MINUTE,'yyyymmddhh24mi')::TIMESTAMP_NTZ AS DATETIME_AMERICA_CHICAGO
@@ -16,4 +20,4 @@ WITH USAGE AS (
     {{ source('google_analytics', 'minutely_site_traffic_by_campaign') }}
 )
 
-SELECT * FROM USAGE
+SELECT * FROM SITE_TRAFFIC

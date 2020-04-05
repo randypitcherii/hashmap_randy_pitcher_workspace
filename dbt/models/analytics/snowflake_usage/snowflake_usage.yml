@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: snowflake_rolling_sum_of_usage
+  - name: rolling_sum_of_snowflake_usage
     description: This relation contains 30-day rolling SUM of total metered credit usage for the hashmap AWS-flavored Snowflake instance.
     columns:
       - name: calculated_on

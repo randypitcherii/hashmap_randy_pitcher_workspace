@@ -15,19 +15,21 @@ UNIONED_REGISTRATIONS AS (
 
 SAFE_REGISTRATIONS AS (
   SELECT
-  {{ 
-    dbt_utils.star(
-      from=ref('stg_virtual_meetup_1'), 
-      except=[
-        "_FILE",
-        "_LINE",
-        "FIRST_NAME",
-        "LAST_NAME",
-        "EMAIL", 
-        "_FIVETRAN_SYNCED"]
-    ) 
-  }},
-  _DBT_SOURCE_RELATION AS VIRTUAL_MEETUP_SOURCE
+    {{ 
+      dbt_utils.star(
+        from=ref('stg_virtual_meetup_1'), 
+        except=[
+          "_FILE",
+          "_LINE",
+          "FIRST_NAME",
+          "LAST_NAME",
+          "EMAIL", 
+          "_FIVETRAN_SYNCED"]
+      ) 
+    }},
+    _DBT_SOURCE_RELATION AS VIRTUAL_MEETUP_SOURCE
+  FROM 
+    UNIONED_REGISTRATIONS
 )
 
 SELECT * FROM SAFE_REGISTRATIONS

@@ -131,6 +131,7 @@ GRANT ROLE RANDY_PITCHER_WORKSPACE_PROD_READ                    TO ROLE RANDY_PI
 GRANT ROLE RANDY_PITCHER_WORKSPACE_DEVELOPER_WH_ALL_PRIVILEGES  TO ROLE RANDY_PITCHER_WORKSPACE_DEVELOPER;
 GRANT ROLE FIVETRAN_READ_ROLE                                   TO ROLE RANDY_PITCHER_WORKSPACE_DEVELOPER;
 GRANT ROLE MATILLION_DB_READ                                    TO ROLE RANDY_PITCHER_WORKSPACE_DEVELOPER;
+GRANT ROLE STITCH_DB_READ                                       TO ROLE RANDY_PITCHER_WORKSPACE_DEVELOPER;
 
 // Grant pre-existing source read roles here
 //=============================================================================

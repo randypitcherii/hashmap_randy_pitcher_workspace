@@ -2,13 +2,13 @@ version: 2
 
 sources:
   - name: virtual_meetup_registration
-    database: fivetran_db
-    schema: virtual_meetup_registration
+    database: FIVETRAN_DB
+    schema: VIRTUAL_MEETUP_REGISTRATION
     loader: fivetran # informational only (free text)
-    loaded_at_field: _fivetran_synced 
+    loaded_at_field: _FIVETRAN_SYNCED 
     
     tags:
       - virtual_meetup_registration
       
     tables:
-      - name: virtual_meetup_1
+      - name: VIRTUAL_MEETUP_1

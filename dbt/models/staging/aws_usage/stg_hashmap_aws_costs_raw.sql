@@ -1,4 +1,4 @@
-{{ config(tags=["hashmap_aws", "daily"]) }}
+{{ config(tags=["aws_usage", "daily"]) }}
 
 WITH
 

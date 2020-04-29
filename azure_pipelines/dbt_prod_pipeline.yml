@@ -6,7 +6,7 @@ pool: 'randy_ec2_cd_agent_pool'
 trigger: 
   - master
 schedules:
-- cron: "0 */1 * * *" # run hourly
+- cron: "0 */6 * * *" # run 4 times a day (every 6 hours)
   displayName: Scheduled DBT Run
   branches:
     include:

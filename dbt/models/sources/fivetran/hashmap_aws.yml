@@ -2,8 +2,8 @@ version: 2
 
 sources:
   - name: aws_costs
-    database: FIVETRAN_DB
-    schema: HASHMAP_AWS_COST_MONITORING
+    database: fivetran_db
+    schema: hashmap_aws_cost_monitoring
     loader: fivetran # informational only (free text)
     loaded_at_field: _fivetran_synced # used to calculate freshness
     
@@ -14,4 +14,4 @@ sources:
       - aws_usage
       
     tables:
-      - name: HASHMAP_AWS_COSTS
+      - name: hashmap_aws_costs

@@ -2,10 +2,10 @@ version: 2
 
 sources:
   - name: azure_costs
-    database: FIVETRAN_DB
-    schema: HASHMAP_AZURE_COST_MONITORING
+    database: fivetran_db
+    schema: hashmap_azure_cost_monitoring
     loader: fivetran # informational only (free text)
-    loaded_at_field: _FIVETRAN_SYNCED # used to calculate freshness
+    loaded_at_field: _fivetran_synced # used to calculate freshness
     
     freshness:
       warn_after: {count: 24, period: hour}
@@ -14,4 +14,4 @@ sources:
       - azure_usage
       
     tables:
-      - name: HASHMAP_AZURE_COSTS
+      - name: hashmap_azure_costs

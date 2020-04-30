@@ -2,10 +2,10 @@ version: 2
 
 sources:
   - name: google_analytics
-    database: FIVETRAN_DB
-    schema: HASHMAP_GOOGLE_ANALYTICS
+    database: fivetran_db
+    schema: hashmap_google_analytics
     loader: fivetran # informational only (free text)
-    loaded_at_field: _FIVETRAN_SYNCED # used to calculate freshness
+    loaded_at_field: _fivetran_synced # used to calculate freshness
     
     tags:
       - google_analytics
@@ -14,7 +14,7 @@ sources:
       warn_after: {count: 24, period: hour}
       
     tables:
-      - name: DAILY_TRAFFIC_BY_INTEREST_AFFINITY_CATEGORY
-      - name: DAILY_TRAFFIC_BY_INTEREST_IN_MARKET_CATEGORY
-      - name: MINUTELY_LANDING_TRAFFIC_BY_CAMPAIGN
-      - name: MINUTELY_SITE_TRAFFIC_BY_CAMPAIGN
+      - name: daily_traffic_by_interest_affinity_category
+      - name: daily_traffic_by_interest_in_market_category
+      - name: minutely_landing_traffic_by_campaign
+      - name: minutely_site_traffic_by_campaign

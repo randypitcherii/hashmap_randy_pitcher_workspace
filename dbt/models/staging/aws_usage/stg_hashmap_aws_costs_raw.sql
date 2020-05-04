@@ -1,4 +1,4 @@
-{{ config(tags=["hashmap_aws", "daily"]) }}
+{{ config(tags=["aws_usage", "daily"]) }}
 
 WITH
 
@@ -20,7 +20,7 @@ STG AS (
 
     {{ 
       dbt_utils.star(
-        from=source('aws_costs', 'HASHMAP_AWS_COSTS'),
+        from=source('aws_costs', 'hashmap_aws_costs'),
         except=[
           "_MODIFIED",
           "BILL_BILLING_PERIOD_START_DATE",
@@ -32,7 +32,7 @@ STG AS (
       ) 
     }}
   FROM
-    {{ source('aws_costs', 'HASHMAP_AWS_COSTS') }}
+    {{ source('aws_costs', 'hashmap_aws_costs') }}
 )
 
 SELECT * FROM STG

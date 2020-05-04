@@ -9,6 +9,9 @@ sources:
     
     freshness:
       warn_after: {count: 24, period: hour}
+    
+    tags:
+      - snowflake_usage
       
     tables:
       - name: query_history

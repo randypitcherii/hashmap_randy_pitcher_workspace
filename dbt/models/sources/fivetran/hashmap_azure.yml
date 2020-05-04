@@ -1,9 +1,9 @@
 version: 2
 
 sources:
-  - name: aws_costs
+  - name: azure_costs
     database: fivetran_db
-    schema: hashmap_aws_cost_monitoring
+    schema: hashmap_azure_cost_monitoring
     loader: fivetran # informational only (free text)
     loaded_at_field: _fivetran_synced # used to calculate freshness
     
@@ -11,7 +11,7 @@ sources:
       warn_after: {count: 24, period: hour}
     
     tags:
-      - aws_usage
+      - azure_usage
       
     tables:
-      - name: hashmap_aws_costs
+      - name: hashmap_azure_costs

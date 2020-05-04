@@ -50,11 +50,13 @@ STG AS (
           "SERVICE_NAME",
           "SERVICE_TIER",
           "CURRENCY",
-          "SERVICE_INFO_2"
+          "SERVICE_INFO_2",
+          "RESOURCE_GROUP"
         ]
       ) 
     }},
-    split_part(INSTANCE_NAME,'/', -1) AS INSTANCE_ID
+    split_part(INSTANCE_NAME,'/', -1) AS INSTANCE_ID,
+    UPPER(RESOURCE_GROUP) AS RESOURCE_GROUP
   FROM
     RNK
   WHERE

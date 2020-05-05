@@ -40,6 +40,8 @@ stages:
               dbt deps --profiles-dir ../azure_pipelines/dbt_pipeline_profiles
               echo "dbt run --profiles-dir ../azure_pipelines/dbt_pipeline_profiles"
               dbt run --profiles-dir ../azure_pipelines/dbt_pipeline_profiles
+              echo "dbt run-operation clean_old_relations --args '{age_cutoff_in_hours: 1}' --profiles-dir ../azure_pipelines/dbt_pipeline_profiles"
+              dbt run-operation clean_old_relations --args '{age_cutoff_in_hours: 1}' --profiles-dir ../azure_pipelines/dbt_pipeline_profiles
             displayName: 'Deploy models with DBT'
             env:
               DBT_PROFILE_SNOWFLAKE_ACCOUNT: $(RANDY_PITCHER_WORKSPACE_SNOWFLAKE_ACCOUNT) # Set these values as secrets in the Azure pipelines web UI

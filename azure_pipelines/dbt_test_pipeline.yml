@@ -34,10 +34,10 @@ stages:
               cd dbt
               echo "dbt deps --profiles-dir ../azure_pipelines/dbt_pipeline_profiles"
               dbt deps --profiles-dir ../azure_pipelines/dbt_pipeline_profiles
-              echo "dbt run-operation clean_old_relations --args '{age_cutoff_in_hours: 48}' --profiles-dir ../azure_pipelines/dbt_pipeline_profiles"
-              dbt run-operation clean_old_relations --args '{age_cutoff_in_hours: 48}' --profiles-dir ../azure_pipelines/dbt_pipeline_profiles
-              echo "dbt run-operation clean_empty_schemas --profiles-dir ../azure_pipelines/dbt_pipeline_profiles"
-              dbt run-operation clean_empty_schemas --profiles-dir ../azure_pipelines/dbt_pipeline_profiles
+              echo "dbt run-operation drop_old_relations --args '{cutoff_in_hours: 48}' --profiles-dir ../azure_pipelines/dbt_pipeline_profiles"
+              dbt run-operation drop_old_relations --args '{cutoff_in_hours: 48}' --profiles-dir ../azure_pipelines/dbt_pipeline_profiles
+              echo "dbt run-operation drop_empty_schemas --profiles-dir ../azure_pipelines/dbt_pipeline_profiles"
+              dbt run-operation drop_empty_schemas --profiles-dir ../azure_pipelines/dbt_pipeline_profiles
               echo "dbt run --profiles-dir ../azure_pipelines/dbt_pipeline_profiles"
               dbt run --profiles-dir ../azure_pipelines/dbt_pipeline_profiles
               echo "dbt test --profiles-dir ../azure_pipelines/dbt_pipeline_profiles"

@@ -1,4 +1,4 @@
-{% macro clean_empty_schemas() %}
+{% macro drop_empty_schemas() %}
 
   {% set cleanup_query %}
 
@@ -34,8 +34,10 @@
         EMPTY_SCHEMAS
 
   {% endset %}
+
     
   {% set drop_commands = run_query(cleanup_query).columns[0].values() %}
+
 
   {% if drop_commands %}
     {% for drop_command in drop_commands %}

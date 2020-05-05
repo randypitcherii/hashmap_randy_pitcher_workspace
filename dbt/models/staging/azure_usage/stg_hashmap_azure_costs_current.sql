@@ -1,4 +1,4 @@
-{{ config(tags=["azure_usage", "daily"], materialized='table') }}
+{{ config(tags=["azure_usage", "daily"]) }}
 
 WITH 
 

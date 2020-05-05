@@ -4,7 +4,9 @@ version: "0.0.1"
 # This setting configures which "profile" dbt uses for this project.
 profile: "hashmap_randy_pitcher_dbt_workspace"
 
-test-paths: [tests]
+# configure standard paths
+test-paths: ['tests']
+macro-paths: ['macros']
 
 models:
   hashmap_randy_pitcher_dbt_workspace:

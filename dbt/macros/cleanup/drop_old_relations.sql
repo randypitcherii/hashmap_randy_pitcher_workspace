@@ -1,4 +1,4 @@
-{% macro drop_old_relations(age_cutoff_in_hours) %}
+{% macro drop_old_relations(cutoff_in_hours) %}
 
   {% set cleanup_query %}
 

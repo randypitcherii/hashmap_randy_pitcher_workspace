@@ -34,14 +34,16 @@ stages:
           - script: |
               echo "source ~/dbt_run_venv/bin/activate"
               source ~/dbt_run_venv/bin/activate
+
               echo "cd dbt"
               cd dbt
+
               echo "dbt deps --profiles-dir ../azure_pipelines/dbt_pipeline_profiles"
               dbt deps --profiles-dir ../azure_pipelines/dbt_pipeline_profiles
-              echo "dbt run --profiles-dir ../azure_pipelines/dbt_pipeline_profiles"
-              dbt run --profiles-dir ../azure_pipelines/dbt_pipeline_profiles
-              echo "dbt run-operation drop_old_relations --args '{cutoff_in_hours: 1}' --profiles-dir ../azure_pipelines/dbt_pipeline_profiles"
-              dbt run-operation drop_old_relations --args '{cutoff_in_hours: 1}' --profiles-dir ../azure_pipelines/dbt_pipeline_profiles
+              
+              echo "dbt run --profiles-dir ../azure_pipelines/dbt_pipeline_profiles && dbt run-operation drop_old_relations --args '{cutoff_in_hours: 1}' --profiles-dir ../azure_pipelines/dbt_pipeline_profiles"
+              dbt run --profiles-dir ../azure_pipelines/dbt_pipeline_profiles && \
+                dbt run-operation drop_old_relations --args '{cutoff_in_hours: 1}' --profiles-dir ../azure_pipelines/dbt_pipeline_profiles
             displayName: 'Deploy models with DBT'
             env:
               DBT_PROFILE_SNOWFLAKE_ACCOUNT: $(RANDY_PITCHER_WORKSPACE_SNOWFLAKE_ACCOUNT) # Set these values as secrets in the Azure pipelines web UI

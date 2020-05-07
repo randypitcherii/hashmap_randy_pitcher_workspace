@@ -113,6 +113,8 @@ SELECT * FROM STREAM_B;
 CREATE OR REPLACE TASK NETFLIX_RATINGS_EVENT_PROCESSOR
   WAREHOUSE = RTE_WH
   SCHEDULE  = 'USING CRON * * * * * America/Chicago' // process new records every minute
+WHEN
+  SYSTEM$STREAM_HAS_DATA('HASHMAP_TRAINING_DB.VIRTUAL_MEETUP_2_STREAMS_AND_TASKS.STREAM_A')
 AS
   INSERT INTO NETFLIX_RATINGS(SHOW_ID, SHOW_TITLE, RATING) (
     SELECT 
@@ -134,9 +136,22 @@ INSERT INTO NETFLIX_RATING_EVENTS(RAW_DATA) SELECT PARSE_JSON(' { "show_id": 3, 
 INSERT INTO NETFLIX_RATING_EVENTS(RAW_DATA) SELECT PARSE_JSON(' { "show_id": 4, "rating": 8 } ');
 INSERT INTO NETFLIX_RATING_EVENTS(RAW_DATA) SELECT PARSE_JSON(' { "show_id": 5, "rating": 7 } ');
 INSERT INTO NETFLIX_RATING_EVENTS(RAW_DATA) SELECT PARSE_JSON(' { "show_id": 6, "rating": 9 } ');
-INSERT INTO NETFLIX_RATING_EVENTS(RAW_DATA) SELECT PARSE_JSON(' { "action_id": 0, "platform": 9.75} ');
-INSERT INTO NETFLIX_RATING_EVENTS(RAW_DATA) SELECT PARSE_JSON(' { "action_id": 2, "user_id": 978234} ');
+INSERT INTO NETFLIX_RATING_EVENTS(RAW_DATA) SELECT PARSE_JSON(' { "platform": 9.75} ');
+
+
+// Find the best show on netflix
+SELECT 
+  SHOW_TITLE, 
+  AVG(RATING) AS AVG_RATING 
+FROM 
+  NETFLIX_RATINGS 
+GROUP BY 
+  SHOW_TITLE 
+ORDER BY 
+  AVG_RATING DESC 
+LIMIT 1;
 //=============================================================================
+
 
 //=============================================================================
 // Cleanup

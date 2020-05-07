@@ -16,7 +16,7 @@
         WHERE 
           TABLE_SCHEMA NOT IN ('INFORMATION_SCHEMA', 'PUBLIC')
           AND 
-          LAST_ALTERED < DATEADD('HOUR', -{{ age_cutoff_in_hours }}, CURRENT_TIMESTAMP)
+          LAST_ALTERED < DATEADD('HOUR', -{{ cutoff_in_hours }}, CURRENT_TIMESTAMP)
       )
 
       SELECT 

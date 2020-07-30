@@ -1,10 +1,17 @@
-run: deps
+run:
 	dbt run -x
+
+test:
+	dbt test
+
+all:
+	dbt run -x
+	dbt test
 
 compile:
 	dbt compile
 
-deps:
+install:
 	dbt deps
 
 clean:

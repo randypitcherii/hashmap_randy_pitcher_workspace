@@ -1,8 +1,8 @@
-compile:
-	dbt compile
-
 run: deps
 	dbt run -x
+
+compile:
+	dbt compile
 
 deps:
 	dbt deps

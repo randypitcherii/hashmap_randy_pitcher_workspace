@@ -17,13 +17,21 @@ quoting:
 
 models:
   hashmap_randy_pitcher_dbt_workspace:
-    copy_grants: true
-    materialized: view # default to views
-    post-hook: 
+    +copy_grants:  true
+    +transient:    true
+    +materialized: view # default to views
+
+    +post-hook: 
       - 'GRANT SELECT ON {{ this }} TO ROLE {{ target.database }}_READ'
+
     cloud_usage:
       +schema: CLOUD_USAGE
       +tags: ['cloud_usage']
+      analytics:
+        materialized: table
+
     google_analytics:
       +schema: GOOGLE_ANALYTICS
       +tags: ['google_analytics']
+      analytics:
+        materialized: table

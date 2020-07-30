@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: google_analytics
     database: fivetran_db
-    schema: hashmap_google_analytics
+    schema: google_analytics
     loader: fivetran # informational only (free text)
     loaded_at_field: _fivetran_synced # used to calculate freshness
     
@@ -14,7 +14,4 @@ sources:
       warn_after: {count: 24, period: hour}
       
     tables:
-      - name: daily_traffic_by_interest_affinity_category
-      - name: daily_traffic_by_interest_in_market_category
-      - name: minutely_landing_traffic_by_campaign
-      - name: minutely_site_traffic_by_campaign
+      - name: hourly_traffic

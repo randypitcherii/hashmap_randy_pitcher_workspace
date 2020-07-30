@@ -1,22 +1,29 @@
 name: "hashmap_randy_pitcher_dbt_workspace"
-version: "0.0.1"
+version: '1.0.0'
+
+config-version: 2
 
 # This setting configures which "profile" dbt uses for this project.
 profile: "hashmap_randy_pitcher_dbt_workspace"
 
 # configure standard paths
-test-paths: ['tests']
+test-paths:  ['tests']
 macro-paths: ['macros']
+
+quoting:
+  database:   false
+  schema:     false
+  identifier: false
 
 models:
   hashmap_randy_pitcher_dbt_workspace:
+    copy_grants: true
     materialized: view # default to views
     post-hook: 
       - 'GRANT SELECT ON {{ this }} TO ROLE {{ target.database }}_READ'
-    staging:
-      schema: STAGING
-    curated:
-      schema: CURATED
-    analytics:
-      schema: ANALYTICS
-      materialized: table # analytics relations should be actual tables
+    cloud_usage:
+      +schema: CLOUD_USAGE
+      +tags: ['cloud_usage']
+    google_analytics:
+      +schema: GOOGLE_ANALYTICS
+      +tags: ['google_analytics']

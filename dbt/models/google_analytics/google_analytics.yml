@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: stg_ga_hourly_traffic
+    description: Hourly Google Analytics traffic data for all Hashmap websites.
+    meta:
+      owner:          randy.pitcher@hashmapinc.com
+      pii:            false
+      classification: public
+    columns:
+      - name: TRAFFIC_TIME_CT
+        description: The hour that traffic was observed, stored in America/Chicago time.
+        tests:
+          - not_null
+      - name: TRAFFIC_HOSTNAME
+        tests:
+          - not_null
+
+  - name: ga_hourly_traffic
+    description: Hourly Google Analytics traffic data for all Hashmap websites.
+    meta:
+      owner:          randy.pitcher@hashmapinc.com
+      pii:            false
+      classification: public
+    columns:
+      - name: TRAFFIC_TIME_CT
+        description: The hour that traffic was observed, stored in America/Chicago time.
+        tests:
+          - not_null
+      - name: TRAFFIC_HOSTNAME
+        tests:
+          - not_null
+      - name: TRAFFIC_PAGE
+        description: Human-friendly indicator of both the hostname and page path (without page arguments). Any traffic to 'hashmapinc.com' is presented without the host as it is the default domain for traffic.
+        tests:
+          - not_null

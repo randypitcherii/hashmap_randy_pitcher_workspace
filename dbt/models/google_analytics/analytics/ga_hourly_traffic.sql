@@ -1,8 +1,8 @@
 SELECT
   TRAFFIC_TIME_CT,
-  TRAFFIC_HOSTNAME,
+  REPLACE(TRAFFIC_HOSTNAME, 'www.', '') AS TRAFFIC_HOSTNAME,
   TRAFFIC_CAMPAIGN,
-  TRAFFIC_PAGE_PATH AS TRAFFIC_PAGE_PATH_RAW,
+  REPLACE(TRAFFIC_PAGE_PATH, 'datarebels', 'hashmap') AS TRAFFIC_PAGE_PATH_RAW,
   TRAFFIC_SOURCE_MEDIUM,
   TRAFFIC_TOTAL_USERS_CNT,
   TRAFFIC_NEW_USERS_CNT,
@@ -25,4 +25,4 @@ FROM
 
 WHERE 
   -- remove development traffic
-  TRAFFIC_HOSTNAME NOT IN ('127.0.0.1', 'localhost') 
+  TRAFFIC_HOSTNAME NOT IN ('127.0.0.1', 'localhost', '0.0.0.0', 'recommender.hashmapinc.com.s3-website-us-east-1.amazonaws.com')

@@ -25,4 +25,4 @@ FROM
 
 WHERE 
   -- remove development traffic
-  TRAFFIC_HOSTNAME IN ('hashmapinc.com', 'profiler.snowflakeinspector.com', 'recommender.hashmapinc.com', 'snowflakeinspector.hashmapinc.com') 
+  TRAFFIC_HOSTNAME IN ('www.hashmapinc.com', 'profiler.snowflakeinspector.com', 'recommender.hashmapinc.com', 'snowflakeinspector.hashmapinc.com') 

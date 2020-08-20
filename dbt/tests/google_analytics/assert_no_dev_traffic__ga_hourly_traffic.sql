@@ -6,4 +6,5 @@ FROM
 
 WHERE 
   -- remove development traffic
-  TRAFFIC_HOSTNAME IN ('127.0.0.1', 'localhost', '0.0.0.0', 'recommender.hashmapinc.com.s3-website-us-east-1.amazonaws.com') 
+  TRAFFIC_HOSTNAME NOT IN ('hashmapinc.com', 'profiler.snowflakeinspector.com', 'recommender.hashmapinc.com', 'snowflakeinspector.hashmapinc.com') 
+  

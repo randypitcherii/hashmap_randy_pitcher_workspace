@@ -10,16 +10,15 @@ WITH HISTORY AS (
         from=source('snowflake_usage', 'warehouse_metering_history'),
         except=[
           "START_TIME",
-          "END_TIME",
-          "INGESTION_TIME"
+          "END_TIME"
         ]
       ) 
-    }}, 
+    }},
 
     END_TIME AS WATERMARK
 
   FROM 
-    {{ source('snowflake_usage', 'warehouse_metering_history') }}
+    {{ source('snowflake_usage', 'warehouse_load_history') }}
 
   {% if is_incremental() %}
     -- this filter will only be applied on an incremental run

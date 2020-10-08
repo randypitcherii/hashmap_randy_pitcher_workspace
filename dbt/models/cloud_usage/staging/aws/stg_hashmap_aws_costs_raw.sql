@@ -31,6 +31,7 @@ STG AS (
         ]
       ) 
     }}
+    
   FROM
     {{ source('aws_costs', 'hashmap_aws_costs') }}
 )

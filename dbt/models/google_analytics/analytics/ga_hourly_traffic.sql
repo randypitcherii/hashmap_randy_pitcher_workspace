@@ -24,5 +24,5 @@ FROM
   {{ ref('stg_ga_hourly_traffic') }}
 
 WHERE 
-  -- remove development traffic
-  TRAFFIC_HOSTNAME IN ('www.hashmapinc.com', 'profiler.snowflakeinspector.com', 'recommender.hashmapinc.com', 'snowflakeinspector.hashmapinc.com') 
+  -- only include traffic from production hostnames - this excludes `localhost`, `0.0.0.0`, etc...
+  TRAFFIC_HOSTNAME IN {{ hashmap_google_analytics_production_hostnames() }}

@@ -7,7 +7,7 @@ WITH HISTORY AS (
 
 		{{ 
       dbt_utils.star(
-        from=source('snowflake_usage', 'warehouse_metering_history'),
+        from=source('snowflake_usage', 'warehouse_load_history'),
         except=[
           "START_TIME",
           "END_TIME"

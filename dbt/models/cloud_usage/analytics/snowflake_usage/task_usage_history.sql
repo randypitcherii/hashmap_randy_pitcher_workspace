@@ -4,7 +4,7 @@ WITH USAGE AS (
   SELECT 
     *
   FROM 
-    {{ source('snowflake_usage', 'task_usage_history') }}
+    {{ source('fivetran_snowflake_usage', 'task_usage_history') }}
 )
 
 SELECT * FROM USAGE

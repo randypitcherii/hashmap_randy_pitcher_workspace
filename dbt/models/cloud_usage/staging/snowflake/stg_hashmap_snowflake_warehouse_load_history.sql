@@ -2,8 +2,8 @@
 
 WITH HISTORY AS (
   SELECT 
-    CONVERT_TIMEZONE('America/Chicago', START_TIME)::TIMESTAMP_NTZ AS START_TIME_CENTRAL_TIME,
-    CONVERT_TIMEZONE('America/Chicago', END_TIME)::TIMESTAMP_NTZ   AS END_TIME_CENTRAL_TIME,
+    {{ standardize_timestamp('START_TIME') }} AS START_TIME_CENTRAL_TIME,
+    {{ standardize_timestamp('END_TIME') }}   AS END_TIME_CENTRAL_TIME,
 
 		{{ 
       dbt_utils.star(

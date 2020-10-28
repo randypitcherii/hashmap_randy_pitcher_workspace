@@ -4,8 +4,8 @@ WITH
 
 STG AS (
   SELECT
-    CONVERT_TIMEZONE('America/Chicago', _MODIFIED)                      :: TIMESTAMP_NTZ AS _MODIFIED_CENTRAL_TIME,
-    CONVERT_TIMEZONE('America/Chicago', _FIVETRAN_SYNCED)               :: TIMESTAMP_NTZ AS _FIVETRAN_SYNCED_CENTRAL_TIME,
+    {{ standardize_timestamp('_MODIFIED') }}        AS _MODIFIED_CENTRAL_TIME,
+    {{ standardize_timestamp('_FIVETRAN_SYNCED') }} AS _FIVETRAN_SYNCED_CENTRAL_TIME,
 
 		SPLIT_PART(_FILE, '/', 3) AS COMPUTED_ID,
 

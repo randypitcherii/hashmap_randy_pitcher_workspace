@@ -24,7 +24,7 @@ SELECT
 
   -- Prepend hostname to page path when hostname is not the main hashmap site
   CASE 
-    WHEN TRAFFIC_HOSTNAME = 'www.hashmapinc.com' THEN TRAFFIC_PAGE_BASE_PATH
+    WHEN TRAFFIC_HOSTNAME = 'hashmapinc.com' THEN TRAFFIC_PAGE_BASE_PATH
     ELSE TRAFFIC_HOSTNAME || TRAFFIC_PAGE_BASE_PATH
   END AS TRAFFIC_PAGE
 
